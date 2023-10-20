@@ -1,6 +1,5 @@
 # trabajo01grupotd2023
-Este repositorio contiene dos archivos de R:
--Problemas_Nerea.R
--teoriadecision_funciones_incertidumbre.R
-El primero de ellos contiene dos problemas resuelto mediante una serie de métodos de incertidumbre. 
-El segundo contiene los métodos programados, listo para ser usado en el primer archivo.
+Este repositorio contiene los siguientes archivos:
+- Enunciados.Rmd, que contiene los enunciados de los problemas para cada uno de los integrantes del grupo.
+- Enunciados con resultados.Rmd, que contiene además de los enunciados, la resolución de los problemas mediante las funciones de incertidumbre.
+- Un archivo R, que se usará de apoyo para la resolución de los problemas. Este se puede encontrar en el repositorio:https://github.com/calote/TDecisionCodigo
