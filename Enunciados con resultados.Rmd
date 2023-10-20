@@ -3,3 +3,295 @@ title: "Enunciados con resoluciones"
 output: html_document
 date: "2023-10-17"
 ---
+
+# Problemas Nerea
+
+## Problema 1
+
+Se pide resolver la siguiente tabla de decisión.
+$$
+\begin{tabular}{c|c|c|c|}
+\multicolumn{4}{r}{Estados de la naturaleza} \\
+\cline{2-4}
+\multirow{3}{*}{Alternativas} & & e1 & e2 \\
+\cline{2-4}
+ & a1 & 3.000 & -1.000\\
+\cline{2-4}
+ & a2 & 2.000 & 2.000 \\
+\cline{2-4}
+\end{tabular}
+$$
+Se debe resolver con cada uno de los métodos o funciones individuales de Incertidumbre por separado (tanto en situación favorable como desfavorable)
+
+------------------------------------------------------------------------
+### Realizamos la lectura del material complementario
+------------------------------------------------------------------------
+
+```{r}
+source("teoriadecision_funciones_incertidumbre.R")
+```
+
+
+------------------------------------------------------------------------
+### Creamos la tabla.
+------------------------------------------------------------------------
+
+Realizamos la creación de la tabla, ayudados de las funciones en el archivo anterior.
+
+
+```{r}
+tablaProblema1N<-crea.tablaX(c(3,-1,
+                               2,2),2,2)
+```
+
+
+
+Tenemos que como los datos estan en miles de euros lo pondremos en unidades simples. Siendo 3 realmente 3000.
+
+Notar que tenemos dos estados de la naturaleza y dos posibles alternativas.
+
+------------------------------------------------------------------------
+### Procedamos a la resolución
+------------------------------------------------------------------------
+
+Vamos a proceder a resolverlo mediante cada uno de los métodos por separado.
+
+Tenemos que como no tenemos ninguna información, no sabemos si un criterio es más o menos probable que otro. Por lo que estamos en decisión bajo incertidumbre. Además, tenemos que ningún criterio tiene un peso mayor que otro. Por lo que respecto al criterio de huriwtzc alfa=0.5.
+Supondremos además que tenemos un único decisor.
+
+Supondremos primero la decisión suponiendo que son beneficios. Y a continuación, lo haremos para cada criterio suponiendo perdidas. Es decir, en el primer caso querremos maximizar beneficios y en el segundo caso minimizar perdidas.
+
+------------------------------
+#### 1) Criterio wald o pesimista
+------------------------------
+
+```{r}
+criterio.Wald(tablaProblema1N,favorable = T)
+```
+
+
+Tenemos que según este criterio la mejor alternativa es d2 con valor óptio 2
+
+Ahora suponiendo costes
+
+```{r}
+criterio.Wald(tablaProblema1N,favorable = F)
+```
+
+Nuevamente por el criterio de wald es preferible la segunda alternativa, nombrada como d2.
+
+-----------------------
+#### 2) Criterio óptimista
+-----------------------
+
+
+```{r}
+criterio.Optimista(tablaProblema1N,favorable = T)
+```
+
+
+Por el criterio optimista vemos que es preferible la primera alternativa(d1) con un valor óptimo de 3.
+
+
+```{r}
+criterio.Optimista(tablaProblema1N,favorable = F)
+```
+
+
+Nuevamente la alternativa preferida por este método es d1.
+
+-----------------------
+#### 3) Criterio Hurwicz
+-----------------------
+
+```{r}
+criterio.Hurwicz(tablaProblema1N,alfa = 0.5,favorable = T)
+```
+
+Por el criterio Hurwicz vemos que es preferible la primera alternativa(d2) con un valor óptimo de 2.
+
+Dibujaremos el criterio de hurwicz
+
+
+```{r}
+dibuja.criterio.Hurwicz(tablaProblema1N,favorable = T)
+```
+
+Esto nos da el gráfico en el que nos muestra con una linea punteada cual es la mejor alternativa en función de los valores de alfa. Para ver donde cambia cada alternativa (entre que valores de alfa) vamso a usar la siguiente función:
+
+
+```{r}
+dibuja.criterio.Hurwicz_Intervalos(tablaProblema1N,favorable = T)
+```
+
+
+Vemos que para valores de alfa entre 0 y 0.75 es preferible la segunda alternativa(d2), pero para valores entre 0.75 y 1 es preferible la primera(d1)
+
+```{r}
+criterio.Hurwicz(tablaProblema1N,alfa = 0.5,favorable = F)
+```
+
+
+En este caso, es preferible la opción d1. 
+
+Vemos que de momento este es el único criterio que ha variado de respuesta entre si estamos con beneficios o con costes
+
+
+Dibujaremos el criterio de hurwicz
+
+```{r}
+dibuja.criterio.Hurwicz(tablaProblema1N,favorable = F)
+```
+
+
+Esto nos da el gráfico en el que nos muestra con una linea punteada cual es la mejor alternativa en función de los valores de alfa. Para ver donde cambia cada alternativa (entre que valores de alfa) vamso a usar la siguiente función:
+
+
+```{r}
+dibuja.criterio.Hurwicz_Intervalos(tablaProblema1N,favorable = F)
+```
+
+
+Vemos que para valores de alfa entre 0 y 0.25 es preferible la segunda alternativa(d2), pero para valores entre 0.25 y 1 es preferible la primera(d1)
+
+-----------------------
+#### 4) Criterio Savage
+-----------------------
+
+```{r}
+criterio.Savage(tablaProblema1N,favorable = T)
+```
+
+Vemos que es preferible la alternativo d2 según el criterio de Savage. Con valor óptimo 1.
+
+
+```{r}
+criterio.Savage(tablaProblema1N,favorable = F)
+```
+
+Vemos que el criterio de Savage en costes prefiere la opción 1.
+
+-----------------------
+#### 5) Criterio Laplace
+-----------------------
+
+
+```{r}
+criterio.Laplace(tablaProblema1N,favorable = T)
+```
+
+
+Vemos que es preferible la alternativo d2 según el criterio de Laplace. Con valor óptimo 2.
+
+
+```{r}
+criterio.Laplace(tablaProblema1N,favorable = F)
+```
+
+
+Vemos que el criterio de Laplace en costes prefiere la opción 1 con valor óptimo 1.
+
+
+-------------------------
+#### 6) Criterio Punto Ideal
+-------------------------
+
+
+```{r}
+criterio.PuntoIdeal(tablaProblema1N,favorable = T)
+```
+
+Vemos que es preferible la alternativo d2 según el criterio de el Punto Ideal. Con valor óptimo 1.
+
+
+```{r}
+criterio.PuntoIdeal(tablaProblema1N,favorable = F)
+```
+
+
+Vemos que el criterio del Punto Ideal en costes prefiere la opción 1 con valor óptimo 1.
+
+
+
+
+## Problema 2
+
+Pepe es un estudiante que estudia un grado superior en su pueblo natal. Se plantea si cambiarse a un instituto de Sevilla, donde hay mayor cantidad de empresas, en las cuales espera obtener trabajo. Mudarse a Sevilla, le reportaría un coste de 3.000 euros. Sin embargo, si obtiene trabajo (suponiendo que la duración mínima fuera un año, con sueldo de 2000 euros), obtendría un beneficio de 24.000 euros.
+Por el contrario, si no se cambia de instituto, no tendría ningún gasto.
+
+Pepe quiere obtener el mayor beneficio de su decisión. Además, en caso de empate, quisiera tener más en cuenta el coste de oportunidad que tienen sus decisiones.
+
+Las dos alternativas posibles para Pepe son:
+
+
+$$
+\begin{itemize}
+
+\item a1= Realizar un cambio de instituto
+\item a2= Quedarse en el instituto en el que esta
+
+\end{itemize}
+
+
+Los dos estados de la naturaleza posibles son:\\
+
+\begin{itemize}
+
+\item a1= Ser contratado
+\item a2= No ser contratado
+
+\end{itemize}
+
+La tabla de decisión para este problema seria:
+
+\begin{tabular}{c|c|c|c|}
+\multicolumn{4}{r}{Estados de la naturaleza} \\
+\cline{2-4}
+\multirow{3}{*}{Alternativas} & & Le contraten & No le contraten \\
+\cline{2-4}
+ & Cambiarse & 21.000 & -3.000\\
+\cline{2-4}
+ & No cambiarse & -24.000 & 0 \\
+\cline{2-4}
+\end{tabular}
+$$
+
+------------------------------------------------------------------------
+### Creamos la tabla.
+------------------------------------------------------------------------
+
+Tenemos nuevamente dos alternativas y dos estados de la naturaleza.
+Tenemos también una serie de costes y beneficios para cada alternativa. Por lo que supondremos la tabla de decisión como la resultante de Beneficios-costes para cada alternativa respecto de cada estado de la naturaleza.
+
+Igual que en el ejericicio anterior, al venir en miles de euros. Las unidades de la tabla serán miles de euros.
+
+
+```{r}
+tablaProblema2N<-crea.tablaX(c(21,-3,
+                               -24,0),2,2)
+```
+
+
+------------------------------------------------------------------------
+### Procedamos a la resolución
+------------------------------------------------------------------------
+
+Usaremos la función que engloba todos los criterios para la resolución del problema.
+
+Tenemos que como no tenemos ninguna información, no sabemos si un criterio es más o menos probable que otro. Por lo que estamos en decisión bajo incertidumbre. Además, tenemos que ningún criterio tiene un peso mayor que otro. Por lo que respecto al criterio de huriwtzc alfa=0.5.
+También, podemos observar que tenemos un único decisor y que no muestra tendencia por nada, es decir, no se le ve pesimista u optimista.
+
+Claramente, Pepe quiere realizar la opción que mayor beneficio le reporte
+
+```{r}
+criterio.Todos(tablaProblema2N,0.5,favorable = T)
+```
+
+
+
+Vemos que todos los criterios indican que la mejor decisión es la primera alternativa, es decir, cambiarse de instituto.
+
+Vemos que según el criterio de Savage(del coste de oportunidad) el cambiarse de instituto es la mejor opción.
+
+
+

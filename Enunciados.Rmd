@@ -1,5 +1,67 @@
 ---
 title: "Enunciados"
-output: html_document
+output:
+  html_document: default
+  pdf_document: default
 date: "2023-10-17"
 ---
+
+# Problemas Nerea
+
+## Problema 1
+
+Se pide resolver la siguiente tabla de decisión.
+$$
+\begin{tabular}{c|c|c|c|}
+\multicolumn{4}{r}{Estados de la naturaleza} \\
+\cline{2-4}
+\multirow{3}{*}{Alternativas} & & e1 & e2 \\
+\cline{2-4}
+ & a1 & 3.000 & -1.000\\
+\cline{2-4}
+ & a2 & 2.000 & 2.000 \\
+\cline{2-4}
+\end{tabular}
+$$
+Se debe resolver con cada uno de los métodos o funciones individuales de Incertidumbre por separado (tanto en situación favorable como desfavorable)
+
+## Problema 2
+
+Pepe es un estudiante que estudia un grado superior en su pueblo natal. Se plantea si cambiarse a un instituto de Sevilla, donde hay mayor cantidad de empresas, en las cuales espera obtener trabajo. Mudarse a Sevilla, le reportaría un coste de 3.000 euros. Sin embargo, si obtiene trabajo (suponiendo que la duración mínima fuera un año, con sueldo de 2000 euros), obtendría un beneficio de 24.000 euros.
+Por el contrario, si no se cambia de instituto, no tendría ningún gasto.
+
+Pepe quiere obtener el mayor beneficio de su decisión. Además, en caso de empate, quisiera tener más en cuenta el coste de oportunidad que tienen sus decisiones.
+
+Las dos alternativas posibles para Pepe son:
+
+$$
+\begin{itemize}
+
+\item a1= Realizar un cambio de instituto
+\item a2= Quedarse en el instituto en el que esta
+
+\end{itemize}
+
+
+Los dos estados de la naturaleza posibles son:\\
+
+\begin{itemize}
+
+\item a1= Ser contratado
+\item a2= No ser contratado
+
+\end{itemize}
+
+La tabla de decisión para este problema seria:
+
+\begin{tabular}{c|c|c|c|}
+\multicolumn{4}{r}{Estados de la naturaleza} \\
+\cline{2-4}
+\multirow{3}{*}{Alternativas} & & Le contraten & No le contraten \\
+\cline{2-4}
+ & Cambiarse & 21.000 & -3.000\\
+\cline{2-4}
+ & No cambiarse & -24.000 & 0 \\
+\cline{2-4}
+\end{tabular}
+$$
