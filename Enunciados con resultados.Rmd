@@ -1,6 +1,8 @@
 ---
 title: "Enunciados con resoluciones"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 date: "2023-10-17"
 ---
 
