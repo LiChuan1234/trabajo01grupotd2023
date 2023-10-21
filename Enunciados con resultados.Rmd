@@ -1,6 +1,8 @@
 ---
 title: "Enunciados con resoluciones"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 date: "2023-10-17"
 ---
 
@@ -292,6 +294,256 @@ criterio.Todos(tablaProblema2N,0.5,favorable = T)
 Vemos que todos los criterios indican que la mejor decisión es la primera alternativa, es decir, cambiarse de instituto.
 
 Vemos que según el criterio de Savage(del coste de oportunidad) el cambiarse de instituto es la mejor opción.
+
+
+
+# Problemas Alba
+
+### Material complementario
+
+
+```{r}
+source("teoriadecision_funciones_incertidumbre.R")
+```
+
+
+## Problema 1
+
+Se pide resolver la siguiente tabla aplicando los criterios de decision bajo incertidumbre tanto en el caso favorable (beneficios), como en el caso desfavorable (costos).
+
+
+```{r echo=FALSE}
+
+knitr::kable(crea.tablaX(c(30,-5,20,28,20,22,25,-8,5,18,12,14,25,24,0,26),numalternativas=4,numestados=4))
+
+```
+
+
+### Creacion de la tabla
+
+Vamos a crear la tabla, para poder aplicar los criterios de decision que se nos pide en el enunciado.
+
+
+```{r}
+tabla=crea.tablaX(c(30,-5,20,28,20,22,25,-8,5,18,12,14,25,24,0,26),numalternativas=4,numestados=4)
+tabla  
+```
+
+
+### Resolucion del problema
+
+
+Se nos pide resolver la tabla por todos los metodos que conocemos de forma individual. 
+
+Como solo tenemos una tabla de datos sin ninguna informacion mas, no podemos decantarnos por un criterio u otro en base a lo que es mas o menos probable. Ademas debido a la falta de informacion usaremos un alfa de 0.5 en el criterio de Huriwtzc.
+
+Como se nos pide estudiar en el caso favorable y el desfavorable. Primero supondremos que queremos maximizar los beneficios y luego supondremos que queremos minimizar las perdidas. 
+
+
+#### 1.Criterio wald o pesimista
+
+
+```{r}
+criterio.Wald(tabla,favorable = T)
+```
+
+Según este criterio la mejor alternativa es d3 con valor óptio 5
+
+Ahora vemos que ocurre con los costes: 
+
+```{r}
+criterio.Wald(tabla,favorable = F)
+```
+De nuevo vemos que el criterio optimo es la d3.
+
+
+#### 2.Criterio óptimista
+
+
+
+```{r}
+criterio.Optimista(tabla,favorable = T)
+```
+Aplicando el criterio optimista la alternativa optima seria la d1 con un valor optiomo de 30
+
+
+
+```{r}
+criterio.Optimista(tabla,favorable = F)
+```
+
+En este caso la alternativa preferible seria la d2
+
+
+#### 3.Criterio Hurwicz
+
+
+```{r}
+criterio.Hurwicz(tabla,alfa = 0.5,favorable = T)
+```
+
+Mediante el criterio Hurwicz es preferible la alternativa d4 con un valor óptimo de 13
+
+Dibujaremos el criterio de hurwicz
+
+
+```{r}
+dibuja.criterio.Hurwicz(tabla,favorable = T)
+```
+Este grafico nos muestra cual es la mejor alternativa en funcion a los valores de alfa. La destaca creando una linea de puntos. 
+
+Vamos a ver entre que valores de alfa cambia: 
+
+```{r}
+dibuja.criterio.Hurwicz_Intervalos(tabla,favorable = T)
+```
+
+
+Vemos que para valores de alfa entre 0 y cerca de 0.4 es preferible la tercera alternativa(d3), para valores entre cerca de 0,4 y 0,6 es mejor la alternativa 4 (d4) y para valores entre cerca de 0,6 a 1 es mejor la primera alternativa.
+
+```{r}
+criterio.Hurwicz(tabla,alfa = 0.5,favorable = F)
+```
+
+
+En el caso desfavorable preferimos la opción d2.
+
+
+Tambien vamos a dibujar el criterio de hurwicz:
+
+```{r}
+dibuja.criterio.Hurwicz(tabla,favorable = F)
+```
+
+Este grafico nos muestra cual es la mejor alternativa en funcion a los valores de alfa. La destaca creando una linea de puntos.
+
+```{r}
+dibuja.criterio.Hurwicz_Intervalos(tabla,favorable = F)
+```
+Vemos que para valores de alfa entre 0 y cerca de 0.4 es preferible la tercera alternativa(d3), sin embargo para de cerca de 0,4 a 1 es preferible la segunda alternativa(d2)
+
+
+#### 4.Criterio Savage
+
+```{r}
+criterio.Savage(tabla,favorable = T)
+```
+
+En este caso se nos dan dos alternativas como las mas favorables que son la d3 y d4, que comparten un valor optimo de 25
+
+
+```{r}
+criterio.Savage(tabla,favorable = F)
+```
+
+Sin embargo en el caso desfavorable, solo nos interesa la d3
+
+#### 5.Criterio Laplace
+
+
+```{r}
+criterio.Laplace(tabla,favorable = T)
+```
+Es preferible la alternativa d4, con un valor optimo de 18,75
+
+
+```{r}
+criterio.Laplace(tabla,favorable = F)
+```
+Si nos fijamos en los costes es preferible la opcion 3 (d3)
+
+
+#### 6.Criterio Punto Ideal
+
+
+```{r}
+criterio.PuntoIdeal(tabla,favorable = T)
+```
+Es preferible el criterio d4, con valor optimo de 25,57342
+
+
+```{r}
+criterio.PuntoIdeal(tabla,favorable = F)
+```
+
+Si nos fijamos en el caso desfavorable tenemos que la mejor es la d3 con valor optimo de 34,0147
+
+
+## Problema 2
+
+Lyre quiere unirse a un gimnasio y ha investigado tres opciones de membresía. Cada membresía tiene sus propias condiciones y costos asociados:
+
+Membresía "Basic Fit": Requiere un pago mensual de 20 euros, pero no cubre todas las instalaciones y clases de gimnasio hasta después de seis meses. Durante los primeros seis meses, solo tiene acceso limitado.
+
+Membresía "Fitness Plus": Ofrece acceso completo a todas las instalaciones y clases desde el primer día, pero con una cuota mensual de 40 euros.
+
+Membresía "Gym Pro": Requiere un pago mensual de 30 euros y cubre todas las instalaciones y clases, excepto las clases de natación.
+
+Lyre planea mantener su membresía de gimnasio durante un año, pero no está segura si usará todas las instalaciones y clases desde el principio debido a su apretado horario en la universidad o si esperará los primeros seis meses antes de hacerlo.
+
+El costo de acceso a las instalaciones y clases de gimnasio es de 15 euros por mes. Si Lyre quiere evaluar el costo total durante el primer año, ¿qué membresía de gimnasio le recomendarías?
+
+
+###Vamos a resolverlo
+
+```{r}
+#Lyre debe elegir entre tres alternativas de membresía de gimnasio: "Basic Fit,",
+#"Fitness Plus," y "Gym Pro.
+
+#desicion: Lyre
+
+#Costos:.
+
+#Alternativas: 
+#1.Basic Fit
+#2.Fitness Pluss
+#3.Gym Pro
+
+
+#Estados de la naturaleza:
+#1.Usar desde el primer dia 
+#2.Esperar los primeros 6 meses 
+
+# Matriz de decisión(costos)
+
+md11 = 20 * 6 + (20 + 15) * 6  # Basic Fit, usar desde el primer día
+md12 = 20 * 6 + (20 + 15) * 6  # Basic Fit, esperar los primeros seis meses
+md21 = 40 * 12  # Fitness Plus, usar desde el primer día
+md22 = 40 * 12  # Fitness Plus, esperar los primeros seis meses
+md31 = 30 * 12 + 15 * 12  # Gym Pro, usar desde el primer día
+md32 = 30 * 6 + 15 * 6  # Gym Pro, esperar los primeros seis meses
+
+```
+
+
+
+### Creamos la tabla
+
+Una vez tenemos lo anterior claro, procedemos a crear la tabla con la que podremos resolver nuestro problema: 
+
+```{r}
+tabla1= crea.tablaX(c(330,330,480,480,540,270),3,2)
+tabla1
+```
+
+### Resolucion del problema
+
+Se nos pide usar la funcion del repositorio que nos permite realizar todos los criterios a la vez.
+
+Estamos en la misma situacion que antes, por lo que el valor que utilizaremos para Huriwtzc sera de un alpha de 0.5.
+
+Lyre quiere elegir la opcion que menos costos le suponga, por lo que realizaremos su resolucion desde ese caso.
+
+
+```{r}
+res=criterio.Todos(tabla1,alfa = 0.5,F)
+knitr::kable(res) 
+```
+
+Podemos decir por tanto que casi todos los criterios nos dice que la mejor opcion es la 1º, que corresponde a inscribirse en "Basic Fit".
+
+El unico criterio que nos da un resultado diferente es el Optimista, que se decanta por la opcion 3, que es inscribirse en "Gym Pro"
+
 
 
 
