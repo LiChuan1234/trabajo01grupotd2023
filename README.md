@@ -11,6 +11,6 @@ Nombre de los participantes en el trabajo:
 - Julia Andújar Gómez
 
 Organización:
-La persona representante del grupo creó un repositorio en GitHub, haciendo como colaboradores al resto de participantes. 
-Mediante el uso de los issues del repositorio, se consultaron dudas y aclaraciones.
-Cada participante fue modificando los archivos a medida que completó la resolución de sus problemas.
+- La persona representante del grupo creó un repositorio en GitHub, haciendo como colaboradores al resto de participantes.
+- Mediante el uso de los issues del repositorio, se consultaron dudas y aclaraciones.
+- Cada participante fue modificando los archivos a medida que completó la resolución de sus problemas.
