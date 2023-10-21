@@ -554,7 +554,7 @@ source("teoriadecision_funciones_incertidumbre.R")
 
 ## Problema 1
 
-La tabla es la siguiente:
+Se pide resolver la siguiente tabla aplicando los criterios de decision bajo incertidumbre tanto en el caso favorable (beneficios), como en el caso desfavorable (costos).
 ```{r}
 tabla1 = crea.tablaX(c(1, 6, 3, 5,
                       2, 1, 1, 3,
