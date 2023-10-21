@@ -5,4 +5,4 @@ Este repositorio contiene los siguientes archivos:
 - Un archivo R, que se usará de apoyo para la resolución de los problemas. Este se puede encontrar en el repositorio:https://github.com/calote/TDecisionCodigo
 
 Nombre de los participantes en el trabajo:
--Alba Alvarez Avendaño
+- Alba Alvarez Avendaño
