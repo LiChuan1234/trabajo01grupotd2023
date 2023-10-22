@@ -711,4 +711,159 @@ tabla2
 sol2<-criterio.Todos(tabla2, alfa=0.5, favorable = T)
 ```
 
-Todos los criterios coinciden en que Ana debería trabajar online, excepto el criterio Optimista, que concluye que Ana debería mudarse.
+Todos los criterios coinciden en que Ana debería trabajar online, excepto el criterio Optimista, que concluye que Ana debería mudarse.  
+
+# Problemas Julia  
+
+## Problema 1  
+Aplicar todos los criterios de decisión bajo incertidumbre tanto para costos como para beneficios al problema cuya matriz de valores numéricos viene dada en la tabla siguiente:
+
+
+```{r, echo=FALSE}
+library(kableExtra)
+source("teoriadecision_funciones_incertidumbre.R")
+tabla1=crea.tablaX(c(1,3,9,
+                       4,3,7,
+                       5,-2,6,
+                       1,2,0
+                       ),numalternativas = 4,numestados = 3)
+
+kable(tabla1)
+```
+
+  
+### A continuación comenzaremos con su resolución utilizando los diferentes criterios:   
+
+#### -Método wald   
+Para beneficios:  
+```{r}
+wald_benef=criterio.Wald(tabla1,favorable = T)
+wald_benef
+```
+La alternativa óptima es d2 con valor óptimo 3  
+Para costos:  
+```{r}
+wald_cost=criterio.Wald(tabla1,favorable = F)
+wald_cost
+```
+La alternativa óptima es d4 con valor óptimo 2  
+
+#### -Método optimista   
+Para beneficios:  
+```{r}
+opt_benef=criterio.Optimista(tabla1,T)
+opt_benef
+```
+La alternativa óptima es d1 con valor óptimo 9  
+Para costos:  
+```{r}
+opt_cost=criterio.Optimista(tabla1,F)
+opt_cost
+```
+La alternativa óptima es d3 con valor óptimo -2    
+
+#### -Método de hurwicz  
+Para beneficios:  
+```{r}
+hurw_benef=criterio.Hurwicz(tabla1,alfa=0.5,favorable=T)
+hurw_benef
+```
+
+Las alternativa óptimas son d1 y d2 con valor óptimo 5  
+Para costos:  
+```{r}
+hurw_cost=criterio.Hurwicz(tabla1,alfa=0.5,favorable=F)
+hurw_cost
+
+```
+La alternativa óptima es d4 con valor óptimo 1  
+
+Dibujemos a continuación el gráfico que muestra la mejor alternativa para cada valor de alfa en ambos casos:  
+Para beneficios:
+```{r}
+dibuja.criterio.Hurwicz(tabla1,T)
+dibuja.criterio.Hurwicz_Intervalos(tabla1,T)
+```
+Para costos:
+```{r}
+dibuja.criterio.Hurwicz(tabla1,F)
+dibuja.criterio.Hurwicz_Intervalos(tabla1,F)
+```
+
+#### -Método savage
+Para beneficios:  
+```{r}
+savg_benef=criterio.Savage(tabla1,T)
+savg_benef
+```
+La alternativa óptima es d2 con valor óptimo 2  
+Para costos:  
+```{r}
+savg_cost=criterio.Savage(tabla1,F)
+savg_cost
+```
+La alternativa óptima es d4 con valor óptimo 4  
+
+#### -Método de laplace  
+Para beneficios:  
+```{r}
+laplc_benef=criterio.Laplace(tabla1,T)
+laplc_benef
+```
+La alternativa óptima es d2 con valor óptimo 4,667  
+Para costos:  
+```{r}
+laplc_cost=criterio.Laplace(tabla1,F)
+laplc_cost
+```
+La alternativa óptima es d4 con valor óptimo 1   
+
+#### -Método del punto ideal
+
+Para beneficios:   
+```{r}
+puntoId_benef=criterio.PuntoIdeal(tabla1,T)
+puntoId_benef
+```
+La alternativa óptima es d2 con valor óptimo 2,236   
+Para costos:  
+```{r}
+puntoId_cost=criterio.PuntoIdeal(tabla1,F)
+puntoId_cost
+```
+La alternativa óptima es d4 con valor óptimo 4   
+
+
+## Problema 2  
+
+Jimena esta planeando un viaje de 3 días a malta con su pareja pero no sabe que hotel reservar.Las tres opciones que le ha dado la agencia son:  
+
+Hotel St.George`s: Alojamiento+vuelo+desayuno 419€ / Todo incuido: 549€  
+Alexandra hotel: Alojamiento+vuelo+desayuno 479€ / Todo incluido: 536€  
+Qawara palace horel: Alojamiento+vuelo+desayuno 439€ / Todo incluido: 560€  
+
+Teniendo en cuenta que se gastarían una media de 22€ y 18€ en comer y cenar respectivamente ¿Cual deberia escoger?   
+
+### A continuación comenzaremos con su resolución utilizando todos los criterios a la vez:  
+Creamos la tabla con la que trabajaremos:
+```{r}
+p11=419+22*3+18*3
+p12=549
+p21=479+22*3+18*3
+p22=536
+p31=439+22*3+18*3
+p32=560
+tabla2=crea.tablaX(c(p11,p12,
+                     p21,p22,
+                     p31,p32),3,2)
+kable(tabla2)
+
+```
+Resolvemos el problema:
+```{r}
+sol=criterio.Todos(tabla2,F)
+sol
+```
+Se puede ver que en 4 de ellos se elige el hotel número 2 y en 2 de ellos (Wald,Hurwicz) se elige el hotel número 3.
+
+

@@ -131,4 +131,32 @@ las personas trabajando presencialmente y reducir el extra de las horas
 extra a un 4%.
 En caso de que Ana sea despedida de esa empresa, sabe que puede
 volver al trabajo que tiene actualmente con un ingreso mensual de 1300 euros.
-¿Debería Ana trabajar online o mudarse?
+¿Debería Ana trabajar online o mudarse?  
+
+# Problemas Julia  
+
+## Problema 1
+Aplicar todos los criterios de decisión bajo incertidumbre tanto para costos como para beneficios al problema cuya matriz de valores numéricos viene dada en la tabla siguiente:
+
+
+```{r, echo=FALSE}
+library(kableExtra)
+source("teoriadecision_funciones_incertidumbre.R")
+tabla1=crea.tablaX(c(1,3,9,
+                       4,3,7,
+                       5,-2,6,
+                       1,2,0
+                       ),numalternativas = 4,numestados = 3)
+
+kable(tabla1)
+```
+
+## Problema 2
+
+Jimena esta planeando un viaje de 3 días a malta con su pareja pero no sabe que hotel reservar.Las tres opciones que le ha dado la agencia son:  
+
+Hotel St.George`s: Alojamiento+vuelo+desayuno 419€ / Todo incuido: 549€  
+Alexandra hotel: Alojamiento+vuelo+desayuno 479€ / Todo incluido: 536€  
+Qawara palace horel: Alojamiento+vuelo+desayuno 439€ / Todo incluido: 560€  
+
+Teniendo en cuenta que se gastarían una media de 22€ y 18€ en comer y cenar respectivamente ¿Cual deberia escoger?
