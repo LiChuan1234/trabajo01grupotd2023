@@ -5,24 +5,31 @@ output:
   html_document: default
 date: "2023-10-17"
 ---
+```{r setup, include=FALSE} 
+knitr::opts_chunk$set(warning = FALSE, message = FALSE) 
+```
+
+
+```{r}
+library(kableExtra)
+```
+
+```{r}
+source("teoriadecision_funciones_incertidumbre.R")
+```
+
+
 
 # Problemas Nerea
 
 ## Problema 1
 
 Se pide resolver la siguiente tabla de decisión.
-$$
-\begin{tabular}{c|c|c|c|}
-\multicolumn{4}{r}{Estados de la naturaleza} \\
-\cline{2-4}
-\multirow{3}{*}{Alternativas} & & e1 & e2 \\
-\cline{2-4}
- & a1 & 3.000 & -1.000\\
-\cline{2-4}
- & a2 & 2.000 & 2.000 \\
-\cline{2-4}
-\end{tabular}
-$$
+```{r}
+knitr::kable(crea.tablaX(c(3,-1,
+                               2,2),numalternativas=2,numestados =2))
+
+```
 Se debe resolver con cada uno de los métodos o funciones individuales de Incertidumbre por separado (tanto en situación favorable como desfavorable)
 
 ## Problema 2
@@ -39,44 +46,12 @@ Pepe quiere obtener el mayor beneficio de su decisión. Además, en caso de
 empate, quisiera tener más en cuenta el coste de oportunidad que tienen
 sus decisiones.
 
-Las dos alternativas posibles para Pepe son:
-
-$$
-\begin{itemize}
-
-\item a1= Realizar un cambio de instituto
-\item a2= Quedarse en el instituto en el que esta
-
-\end{itemize}
 
 
-Los dos estados de la naturaleza posibles son:\\
-
-\begin{itemize}
-
-\item a1= Ser contratado
-\item a2= No ser contratado
-
-\end{itemize}
-
-La tabla de decisión para este problema seria:
-
-\begin{tabular}{c|c|c|c|}
-\multicolumn{4}{r}{Estados de la naturaleza} \\
-\cline{2-4}
-\multirow{3}{*}{Alternativas} & & Le contraten & No le contraten \\
-\cline{2-4}
- & Cambiarse & 21.000 & -3.000\\
-\cline{2-4}
- & No cambiarse & -24.000 & 0 \\
-\cline{2-4}
-\end{tabular}
-$$
-
-#Problemas Alba
+# Problemas Alba
 
 
-##Problema 1:
+## Problema 1:
 
 Se pide resolver la siguiente tabla aplicando los criterios de decision bajo incertidumbre tanto en el caso favorable (beneficios), como en el caso desfavorable (costos).
 
@@ -87,7 +62,7 @@ knitr::kable(crea.tablaX(c(30,-5,20,28,20,22,25,-8,5,18,12,14,25,24,0,26),numalt
 ```
 
 
-##Problema 2: 
+## Problema 2: 
 
 
 Lyre quiere unirse a un gimnasio y ha investigado tres opciones de membresía. Cada membresía tiene sus propias condiciones y costos asociados:
@@ -109,7 +84,7 @@ El costo de acceso a las instalaciones y clases de gimnasio es de 15 euros por m
 Se pide resolver la siguiente tabla aplicando los criterios de decision bajo incertidumbre tanto en el caso favorable (beneficios), como en el caso desfavorable (costos).
 
 ```{r}
-kable(tabla1 = crea.tablaX(c(1, 6, 3, 5,
+kable(crea.tablaX(c(1, 6, 3, 5,
                       2, 1, 1, 3,
                       5, 4, 2, 1,
                       1, 5, 2, 4),
