@@ -6,6 +6,10 @@ output:
 date: "2023-10-17"
 ---
 
+```{r}
+library(kableExtra)
+```
+
 # Problemas Nerea
 
 ## Problema 1
@@ -562,6 +566,7 @@ tabla1 = crea.tablaX(c(1, 6, 3, 5,
                       1, 5, 2, 4),
                     numalternativas = 4, numestados = 4)
 
+
 ```
 
 Vamos a comparar las conclusiones según sea el caso favorable (beneficios)
@@ -709,6 +714,7 @@ tabla2
 
 ```{r}
 sol2<-criterio.Todos(tabla2, alfa=0.5, favorable = T)
+sol2
 ```
 
 Todos los criterios coinciden en que Ana debería trabajar online, excepto el criterio Optimista, que concluye que Ana debería mudarse.  
