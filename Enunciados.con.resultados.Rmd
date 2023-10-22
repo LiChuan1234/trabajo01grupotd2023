@@ -6,6 +6,18 @@ output:
 date: "2023-10-17"
 ---
 
+```{r setup, include=FALSE, error=TRUE, encoding="UTF-8"} 
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, error=TRUE,encoding="UTF-8") 
+```
+
+------------------------------------------------------------------------
+### Realizamos la lectura del material complementario
+------------------------------------------------------------------------
+
+```{r}
+source("teoriadecision_funciones_incertidumbre.R")
+```
+
 ```{r}
 library(kableExtra)
 ```
@@ -15,27 +27,14 @@ library(kableExtra)
 ## Problema 1
 
 Se pide resolver la siguiente tabla de decisión.
-$$
-\begin{tabular}{c|c|c|c|}
-\multicolumn{4}{r}{Estados de la naturaleza} \\
-\cline{2-4}
-\multirow{3}{*}{Alternativas} & & e1 & e2 \\
-\cline{2-4}
- & a1 & 3.000 & -1.000\\
-\cline{2-4}
- & a2 & 2.000 & 2.000 \\
-\cline{2-4}
-\end{tabular}
-$$
+```{r}
+knitr::kable(crea.tablaX(c(3,-1,
+                               2,2),numalternativas=2,numestados =2))
+
+```
 Se debe resolver con cada uno de los métodos o funciones individuales de Incertidumbre por separado (tanto en situación favorable como desfavorable)
 
-------------------------------------------------------------------------
-### Realizamos la lectura del material complementario
-------------------------------------------------------------------------
 
-```{r}
-source("teoriadecision_funciones_incertidumbre.R")
-```
 
 
 ------------------------------------------------------------------------
@@ -229,38 +228,25 @@ Pepe quiere obtener el mayor beneficio de su decisión. Además, en caso de empa
 
 Las dos alternativas posibles para Pepe son:
 
+ a1= Realizar un cambio de instituto
+ a2= Quedarse en el instituto en el que esta
 
-$$
-\begin{itemize}
+Los dos estados de la naturaleza posibles son:
 
-\item a1= Realizar un cambio de instituto
-\item a2= Quedarse en el instituto en el que esta
-
-\end{itemize}
+ a1= Ser contratado
+ a2= No ser contratado
 
 
-Los dos estados de la naturaleza posibles son:\\
-
-\begin{itemize}
-
-\item a1= Ser contratado
-\item a2= No ser contratado
-
-\end{itemize}
 
 La tabla de decisión para este problema seria:
 
-\begin{tabular}{c|c|c|c|}
-\multicolumn{4}{r}{Estados de la naturaleza} \\
-\cline{2-4}
-\multirow{3}{*}{Alternativas} & & Le contraten & No le contraten \\
-\cline{2-4}
- & Cambiarse & 21.000 & -3.000\\
-\cline{2-4}
- & No cambiarse & -24.000 & 0 \\
-\cline{2-4}
-\end{tabular}
-$$
+Las dos alternativas posibles para Pepe son:
+
+```{r}
+knitr::kable(crea.tablaX(c(21,-3,
+                               -24,0),2,2))
+```
+
 
 ------------------------------------------------------------------------
 ### Creamos la tabla.
